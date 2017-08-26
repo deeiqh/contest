@@ -1,0 +1,69 @@
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+int main()
+{
+	map<string, string> mapa; 
+	mapa["-z -y"] = "-y";
+	mapa["-y -y"] = "-x";
+	mapa["+z -y"] = "-y";
+	mapa["+y -y"] = "+x";
+
+	mapa["+y +y"] = "-x";
+	mapa["+z +y"] = "+y";
+	mapa["-z +y"] = "+y";
+	mapa["-y +y"] = "+x";
+
+	mapa["-z +z"] = "+x";
+	mapa["+y +z"] = "+z";
+	mapa["-y +z"] = "+z";
+	mapa["+z +z"] = "-x";
+
+	mapa["+z -z"] = "+x";
+	mapa["-y -z"] = "-z";
+	mapa["+y -z"] = "-z";
+	mapa["-z -z"] = "-x";
+
+	mapa["+y -x"] = "-y";
+	mapa["-y -x"] = "+y";
+	mapa["+z -x"] = "-z";
+	mapa["-z -x"] = "+z";
+
+	unsigned int c;
+	cin >> c;
+	string s,t,d;
+	int cuenta = 0;
+	d = "";
+	while(c != 0){
+		if(c == 2){
+			cin >> s; 
+			cout << s << '\n';
+		}
+		else{		
+			for(int i=0; i!= c-1; i++){	
+				cin >>d;
+				if(d != "No"){					
+					if(cuenta == 1){
+						d = d + " " + s;
+						cuenta ++;
+					}					
+					else
+						if(cuenta == 0){
+							s = d;
+							cuenta++;
+						}
+					if(cuenta == 2){
+						s = mapa[d];
+						cuenta = 1;
+					}
+				}
+			}
+			cout << s << '\n';
+		}
+		cin >> c;
+	}
+
+	return 0;
+}
